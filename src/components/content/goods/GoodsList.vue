@@ -12,9 +12,9 @@ export default {
   },
   props: {
     goods: {
-      type: Object,
+      type: Array,
       default () {
-        return {}
+        return []
       }
     }
   }
