@@ -8,28 +8,28 @@
 
 <script>
 export default {
-  name: "TabControl",
+  name: 'TabControl',
   props: {
     title: {
       type: Array,
       default () {
-        return [];
-      },
-    },
+        return []
+      }
+    }
   },
-  data() {
+  data () {
     return {
-      itemIndex: 0,
-    };
+      itemIndex: 0
+    }
   },
   methods: {
-    itemClick(index) {
-      this.itemIndex = index;
+    itemClick (index) {
+      this.itemIndex = index
       console.log(index)
-      this.$emit("tabClick", index);
-    },
-  },
-};
+      this.$emit('tabClick', index)
+    }
+  }
+}
 </script>
 
 <style scoped>

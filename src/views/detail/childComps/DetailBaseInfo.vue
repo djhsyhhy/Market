@@ -43,6 +43,7 @@ export default {
   padding: 0 8px;
   color: #bbbbbb;
   border-bottom: 2px groove #f2f5f8;
+  background-color: #f6f6f6
 }
 
 .info-title {

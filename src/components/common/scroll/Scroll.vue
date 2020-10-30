@@ -7,53 +7,57 @@
 </template>
 
 <script>
-import BScroll from "@better-scroll/core";
-import Pullup from "@better-scroll/pull-up";
-BScroll.use(Pullup);
+import BScroll from '@better-scroll/core'
+import Pullup from '@better-scroll/pull-up'
+BScroll.use(Pullup)
 export default {
+  name: 'Scroll',
   props: {
     probeType: {
       type: Number,
-      default: 0,
+      default: 0
     },
     pullUpLoad: {
       type: Boolean,
-      deault: false,
-    },
+      deault: false
+    }
   },
   mounted() {
+
     this.scroll = new BScroll(this.$refs.warpper, {
       click: true,
       probeType: this.probeType,
-      pullUpLoad: this.pullUpLoad,
-    });
-    this.scroll.on("scroll", (option) => {
-      this.$emit("scroll", option);
-    });
-    this.scroll.on("pullingUp", () => {
-      this.$emit("pullingUp");
-    });
+      pullUpLoad: this.pullUpLoad
+    })
+    console.log('qwe')
+    this.scroll.on('scroll', (option) => {
+      this.$emit('scroll', option)
+    })
+    this.scroll.on('pullingUp', () => {
+      this.$emit('pullingUp')
+    })
+
   },
   data() {
     return {
-      scroll: null,
-    };
+      scroll: null
+    }
   },
   methods: {
     scrollTo(x, y, time) {
-      this.scroll && this.scroll.scrollTo(x, y, time);
+      this.scroll && this.scroll.scrollTo(x, y, time)
     },
     finishPullUp() {
-      this.scroll.finishPullUp();
+      this.scroll.finishPullUp()
     },
     refresh() {
-      this.scroll && this.scroll.refresh();
+      this.scroll && this.scroll.refresh()
     },
     isScoollY() {
       return this.scroll ? this.scroll.y : 0
     }
-  },
-};
+  }
+}
 </script>
 
 <style scoped>

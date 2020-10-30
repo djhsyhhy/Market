@@ -24,7 +24,7 @@ export default {
   components: {
     Swiper,
     SwiperItem
-  },
+  }
 
 }
 </script>
@@ -33,5 +33,6 @@ export default {
 .detail-swiper {
   overflow: hidden;
   height: 300px;
+  width: 100%;
 }
 </style>

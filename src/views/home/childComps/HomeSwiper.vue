@@ -12,7 +12,7 @@
 import {
   Swiper,
   SwiperItem
-} from "components/common/swiper/index";
+} from 'components/common/swiper/index'
 export default {
   props: {
     banners: {
@@ -22,13 +22,13 @@ export default {
       }
     }
   },
-  data() {
+  data () {
     return {
       isLoad: false
     }
   },
   methods: {
-    imageLoad() {
+    imageLoad () {
       if (!this.isLoad) {
         this.$emit('homeImageLoad')
         this.isLoad = true

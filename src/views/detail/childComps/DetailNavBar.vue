@@ -15,26 +15,27 @@
 </template>
 
 <script>
-import NavBar from "components/common/navbar/NavBar";
+import NavBar from 'components/common/navbar/NavBar'
 export default {
   data() {
     return {
-      titles: ["商品", "详情", "价格", "评价"],
+      titles: ['商品', '参数', '评论', '推荐'],
       currentIndex: 0
-    };
+    }
   },
   methods: {
     backClick() {
-      this.$router.go(-1);
+      this.$router.go(-1)
     },
     titleClick(index) {
       this.currentIndex = index
-    }
+      this.$emit('itemClick', index)
+    },
   },
   components: {
-    NavBar,
-  },
-};
+    NavBar
+  }
+}
 </script>
 
 <style scoped>

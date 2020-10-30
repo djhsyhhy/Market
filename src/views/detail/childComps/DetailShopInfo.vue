@@ -30,14 +30,14 @@
     </div>
   </div>
   <div class="shop-bottom">
-    <div class="enter-shop">近店逛逛</div>
+    <div class="enter-shop">进店逛逛</div>
   </div>
 </div>
 </template>
 
 <script>
 export default {
-  name: "DetailShopInfo",
+  name: 'DetailShopInfo',
   props: {
     shop: {
       type: Object,
@@ -47,8 +47,8 @@ export default {
     }
   },
   filters: {
-    sellCountFilter(value) {
-      if (value < 10000) return value;
+    sellCountFilter (value) {
+      if (value < 10000) return value
       return (value / 10000).toFixed(1) + '万'
     }
   }
@@ -59,6 +59,7 @@ export default {
 .shop-info {
   padding: 25px 8px;
   border-bottom: 5px groove #bbbbbb;
+  background-color: #f6f6f6
 }
 
 .shop-top {

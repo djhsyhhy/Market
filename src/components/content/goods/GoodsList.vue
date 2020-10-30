@@ -26,7 +26,7 @@ export default {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-
+  background-color: rgb(245, 234, 234);
   padding: 2px;
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
 <div class="goods-item" @click="itemClick">
-  <img :src="goodsItem.show.img" @load="imageOnload">
+  <img :src="showImage" @load="imageOnload">
   <div class="goods-info">
     <p>{{goodsItem.title}}</p>
     <span class="price">{{goodsItem.price}}</span>
@@ -15,26 +15,31 @@ export default {
     goodsItem: {
       type: Object,
       default () {
-        return [];
-      },
-    },
-  },
-  methods: {
-    imageOnload() {
-      this.$bus.$emit('imageOnload')
-    },
-    itemClick() {
-      this.$router.push('/detail/' + this.goodsItem.iid)
+        return []
+      }
     }
   },
-};
+  computed: {
+    showImage () {
+      return this.goodsItem.image || this.goodsItem.show.img
+    }
+  },
+  methods: {
+    imageOnload () {
+      this.$bus.$emit('imageOnload')
+    },
+    itemClick () {
+      this.$router.push('/detail/' + this.goodsItem.iid)
+    }
+  }
+}
 </script>
 
-<style>
+<style scoped>
 .goods-item {
   padding-bottom: 40px;
   position: relative;
-
+  background-color: #fff;
   width: 48%;
 }
 
