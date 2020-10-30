@@ -1,7 +1,7 @@
 import { debounce } from './utils'
-import BackTop from "components/content/backTop/BackTop";
+import BackTop from 'components/content/backTop/BackTop'
 export const itemListenerMixin = {
-  data() {
+  data () {
     return {
       itemImgListener: null,
       newRefresh: null
@@ -21,20 +21,20 @@ export const backTopMixin = {
   components: {
     BackTop
   },
-  data() {
+  data () {
     return {
       isShow: false
     }
   },
   methods: {
-    backClick() {
-      this.$refs.scroll.scrollTo(0, 0, 500);
-      // console.log("aa"); 
+    backClick () {
+      this.$refs.scroll.scrollTo(0, 0, 500)
+      // console.log("aa");
     },
-    demo(optinon) {
-      this.isShow = -optinon.y > 1000;
-      //z这个1000可以进行传递
+    demo (optinon) {
+      this.isShow = -optinon.y > 1000
+      // z这个1000可以进行传递
     }
-  },
+  }
 
 }

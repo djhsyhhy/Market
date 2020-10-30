@@ -17,20 +17,20 @@
 <script>
 import NavBar from 'components/common/navbar/NavBar'
 export default {
-  data() {
+  data () {
     return {
       titles: ['商品', '参数', '评论', '推荐'],
       currentIndex: 0
     }
   },
   methods: {
-    backClick() {
+    backClick () {
       this.$router.go(-1)
     },
-    titleClick(index) {
+    titleClick (index) {
       this.currentIndex = index
       this.$emit('itemClick', index)
-    },
+    }
   },
   components: {
     NavBar

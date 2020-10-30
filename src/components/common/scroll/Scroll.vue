@@ -22,8 +22,7 @@ export default {
       deault: false
     }
   },
-  mounted() {
-
+  mounted () {
     this.scroll = new BScroll(this.$refs.warpper, {
       click: true,
       probeType: this.probeType,
@@ -36,24 +35,23 @@ export default {
     this.scroll.on('pullingUp', () => {
       this.$emit('pullingUp')
     })
-
   },
-  data() {
+  data () {
     return {
       scroll: null
     }
   },
   methods: {
-    scrollTo(x, y, time) {
+    scrollTo (x, y, time) {
       this.scroll && this.scroll.scrollTo(x, y, time)
     },
-    finishPullUp() {
+    finishPullUp () {
       this.scroll.finishPullUp()
     },
-    refresh() {
+    refresh () {
       this.scroll && this.scroll.refresh()
     },
-    isScoollY() {
+    isScoollY () {
       return this.scroll ? this.scroll.y : 0
     }
   }

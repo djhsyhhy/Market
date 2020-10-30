@@ -1,16 +1,16 @@
 <template>
-    <div id="hy-swiper">
-      <div class="swiper" @touchstart="touchStart" @touchmove="touchMove" @touchend="touchEnd">
-        <slot></slot>
-      </div>
-      <slot name="indicator">
-      </slot>
-      <div class="indicator">
-        <slot name="indicator" v-if="showIndicator && slideCount>1">
-          <div v-for="(item, index) in slideCount" class="indi-item" :class="{active: index === currentIndex-1}" :key="index"></div>
-        </slot>
-      </div>
-    </div>
+<div id="hy-swiper">
+  <div class="swiper" @touchstart="touchStart" @touchmove="touchMove" @touchend="touchEnd">
+    <slot></slot>
+  </div>
+  <slot name="indicator">
+  </slot>
+  <div class="indicator">
+    <slot name="indicator" v-if="showIndicator && slideCount>1">
+      <div v-for="(item, index) in slideCount" class="indi-item" :class="{active: index === currentIndex-1}" :key="index"></div>
+    </slot>
+  </div>
+</div>
 </template>
 
 <script>
@@ -18,11 +18,11 @@ export default {
   name: 'Swiper',
   props: {
     interval: {
-		    type: Number,
+      type: Number,
       default: 3000
     },
     animDuration: {
-		    type: Number,
+      type: Number,
       default: 300
     },
     moveRatio: {
@@ -35,7 +35,7 @@ export default {
     }
   },
   data: function () {
-		  return {
+    return {
       slideCount: 0, // 元素个数
       totalWidth: 0, // swiper的宽度
       swiperStyle: {}, // swiper样式
@@ -53,13 +53,13 @@ export default {
     }, 3000)
   },
   methods: {
-		  /**
-       * 定时器操作
-       */
+    /**
+     * 定时器操作
+     */
     startTimer: function () {
-		    this.playTimer = window.setInterval(() => {
-		      this.currentIndex++
-		      this.scrollContent(-this.currentIndex * this.totalWidth)
+      this.playTimer = window.setInterval(() => {
+        this.currentIndex++
+        this.scrollContent(-this.currentIndex * this.totalWidth)
       }, this.interval)
     },
     stopTimer: function () {
@@ -67,8 +67,8 @@ export default {
     },
 
     /**
-       * 滚动到正确的位置
-       */
+     * 滚动到正确的位置
+     */
     scrollContent: function (currentPosition) {
       // 0.设置正在滚动
       this.scrolling = true
@@ -85,8 +85,8 @@ export default {
     },
 
     /**
-       * 校验正确的位置
-       */
+     * 校验正确的位置
+     */
     checkPosition: function () {
       window.setTimeout(() => {
         // 1.校验正确的位置
@@ -105,8 +105,8 @@ export default {
     },
 
     /**
-       * 设置滚动的位置
-       */
+     * 设置滚动的位置
+     */
     setTransform: function (position) {
       this.swiperStyle.transform = `translate3d(${position}px, 0, 0)`
       this.swiperStyle['-webkit-transform'] = `translate3d(${position}px), 0, 0`
@@ -114,9 +114,9 @@ export default {
     },
 
     /**
-       * 操作DOM, 在DOM前后添加Slide
-       */
-		  handleDom: function () {
+     * 操作DOM, 在DOM前后添加Slide
+     */
+    handleDom: function () {
       // 1.获取要操作的元素
       const swiperEl = document.querySelector('.swiper')
       const slidesEls = swiperEl.getElementsByClassName('slide')
@@ -139,8 +139,8 @@ export default {
     },
 
     /**
-       * 拖动事件的处理
-       */
+     * 拖动事件的处理
+     */
     touchStart: function (e) {
       // 1.如果正在滚动, 不可以拖动
       if (this.scrolling) return
@@ -184,8 +184,8 @@ export default {
     },
 
     /**
-       * 控制上一个, 下一个
-       */
+     * 控制上一个, 下一个
+     */
     previous: function () {
       this.changeItem(-1)
     },
@@ -210,36 +210,36 @@ export default {
 </script>
 
 <style scoped>
-  #hy-swiper {
-    overflow: hidden;
-    position: relative;
-  }
+#hy-swiper {
+  overflow: hidden;
+  position: relative;
+}
 
-  .swiper {
-    display: flex;
-  }
+.swiper {
+  display: flex;
+}
 
-  .indicator {
-    display: flex;
-    justify-content: center;
-    position: absolute;
-    width: 100%;
-    bottom: 8px;
-  }
+.indicator {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  width: 100%;
+  bottom: 8px;
+}
 
-  .indi-item {
-    box-sizing: border-box;
-    width: 8px;
-    height: 8px;
-    border-radius: 4px;
-    background-color: #fff;
-    line-height: 8px;
-    text-align: center;
-    font-size: 12px;
-    margin: 0 5px;
-  }
+.indi-item {
+  box-sizing: border-box;
+  width: 8px;
+  height: 8px;
+  border-radius: 4px;
+  background-color: #fff;
+  line-height: 8px;
+  text-align: center;
+  font-size: 12px;
+  margin: 0 5px;
+}
 
-  .indi-item.active {
-    background-color: rgba(212,62,46,1.0);
-  }
+.indi-item.active {
+  background-color: rgba(212, 62, 46, 1.0);
+}
 </style>

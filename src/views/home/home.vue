@@ -19,47 +19,47 @@
 import {
   getHomeMultidata,
   getHomeGoods
-} from "network/home";
+} from 'network/home'
 import {
   itemListenerMixin,
   backTopMixin
-} from "common/mixin";
+} from 'common/mixin'
 import {
   debounce
-} from "common/utils";
-import NavBar from "components/common/navbar/NavBar";
-import HomeSwiper from "./childComps/HomeSwiper";
-import RecommendView from "./childComps/RecommendView";
-import FeatureView from "./childComps/FeatureView";
-import TabControl from "components/content/tabControl/TabControl";
-import GoodsList from "components/content/goods/GoodsList";
-import Scroll from "../../components/common/scroll/Scroll";
+} from 'common/utils'
+import NavBar from 'components/common/navbar/NavBar'
+import HomeSwiper from './childComps/HomeSwiper'
+import RecommendView from './childComps/RecommendView'
+import FeatureView from './childComps/FeatureView'
+import TabControl from 'components/content/tabControl/TabControl'
+import GoodsList from 'components/content/goods/GoodsList'
+import Scroll from '../../components/common/scroll/Scroll'
 
 export default {
-  name: "home",
-  data() {
+  name: 'home',
+  data () {
     return {
       banners: [],
       recommends: [],
       goods: {
         pop: {
           page: 0,
-          list: [],
+          list: []
         },
         new: {
           page: 0,
-          list: [],
+          list: []
         },
         sell: {
           page: 0,
-          list: [],
-        },
+          list: []
+        }
       },
-      currentType: "pop",
+      currentType: 'pop',
       offsetTop: 0,
       isFixed: false,
-      isScoollY: null,
-    };
+      isScoollY: null
+    }
   },
   mixins: [itemListenerMixin, backTopMixin],
   components: {
@@ -69,99 +69,99 @@ export default {
     FeatureView,
     TabControl,
     GoodsList,
-    Scroll,
+    Scroll
   },
   computed: {
-    showGoods() {
+    showGoods () {
       // 计算显示某个商品
-      return this.goods[this.currentType].list;
-    },
+      return this.goods[this.currentType].list
+    }
   },
 
-  activated() {
+  activated () {
     // 跳转位置
-    console.log("ok");
+    console.log('ok')
 
-    this.$refs.scroll.scrollTo(0, this.isScoollY, 0);
-    this.$refs.scroll.refresh();
+    this.$refs.scroll.scrollTo(0, this.isScoollY, 0)
+    this.$refs.scroll.refresh()
   },
-  deactivated() {
+  deactivated () {
     // 记录位置
-    this.isScoollY = this.$refs.scroll.isScoollY();
+    this.isScoollY = this.$refs.scroll.isScoollY()
 
     // this.$bus.$off('itemImgLoad', this.itemImgListener)
   },
 
-  created() {
+  created () {
     // 获得网络数据
-    this.getHomeMultidata();
-    this.getHomeGoods("pop");
-    this.getHomeGoods("new");
-    this.getHomeGoods("sell");
+    this.getHomeMultidata()
+    this.getHomeGoods('pop')
+    this.getHomeGoods('new')
+    this.getHomeGoods('sell')
   },
-  mounted() {},
+  mounted () {},
   methods: {
     // 网络请求
-    getHomeMultidata() {
+    getHomeMultidata () {
       getHomeMultidata().then((res) => {
         // 轮播图
-        this.banners = res.data.banner.list;
+        this.banners = res.data.banner.list
         // 轮播图下的
-        this.recommends = res.data.recommend.list;
-      });
+        this.recommends = res.data.recommend.list
+      })
     },
     // 商品信息
-    getHomeGoods(type) {
-      const page = this.goods[type].page + 1;
+    getHomeGoods (type) {
+      const page = this.goods[type].page + 1
       getHomeGoods(type, page).then((res) => {
-        this.goods[type].list.push(...res.data.list);
-        this.goods[type].page += 1;
+        this.goods[type].list.push(...res.data.list)
+        this.goods[type].page += 1
         // 调用 的时候解决刷新的问题
-        this.$refs.scroll.finishPullUp();
-      });
+        this.$refs.scroll.finishPullUp()
+      })
     },
 
     // 选择方法
 
     // 这个是选择位置
-    tabClick(index) {
+    tabClick (index) {
       switch (index) {
         case 0:
-          this.currentType = "pop";
-          break;
+          this.currentType = 'pop'
+          break
         case 1:
-          this.currentType = "new";
-          break;
+          this.currentType = 'new'
+          break
         case 2:
-          this.currentType = "sell";
-          break;
+          this.currentType = 'sell'
+          break
       }
-      this.$refs.tabControl1.itemIndex = index;
-      this.$refs.tabControl2.itemIndex = index;
+      this.$refs.tabControl1.itemIndex = index
+      this.$refs.tabControl2.itemIndex = index
     },
 
     // 返回顶部的按钮 这个使用了混入
     // backClick() {
     //   this.$refs.scroll.scrollTo(0, 0, 500);
-    //   // console.log("aa"); 
+    //   // console.log("aa");
     // },
     // 滚动位置的监听
-    contentScroll(optinon) {
+    contentScroll (optinon) {
       this.demo(optinon)
-      this.isFixed = -optinon.y > this.offsetTop;
+      this.isFixed = -optinon.y > this.offsetTop
     },
     // 下拉加载更多的信息
-    loadMore() {
+    loadMore () {
       // console.log("123");
-      this.getHomeGoods(this.currentType);
+      this.getHomeGoods(this.currentType)
     },
     // 这个是吸顶的效果，这个地方是两个，一个上去了，另一个到位置的时候展示
-    homeImageLoad() {
-      this.offsetTop = this.$refs.tabControl2.$el.offsetTop;
+    homeImageLoad () {
+      this.offsetTop = this.$refs.tabControl2.$el.offsetTop
       // console.log(this.$refs.tabControl2.$el);
-    }, // 吸顶效果
-  },
-};
+    } // 吸顶效果
+  }
+}
 </script>
 
 <style scoped>
