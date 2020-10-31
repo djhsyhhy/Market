@@ -165,7 +165,10 @@ export default {
       product.price = this.goods.realPrice
       product.iid = this.iid
 
-      this.$store.dispatch('addCarLish', product)
+      this.$store.dispatch('addCarLish', product).then((res, rej) => {
+        this.$toast.show(res, 2000)  
+      })
+      
     }
 
   },

@@ -31,10 +31,12 @@
           return item.checked
         }).reduce((preValue, item) => {
           return preValue + item.price * item.count
-        },0).toFixed(2)
+        }, 0).toFixed(2)
       },
       checkLength(){
-        return this.cartList.filter(item => item.checked).length
+        return this.cartList.filter(item => item.checked).reduce((a, b) => {
+          return a + item.count
+        }, 0)
       },
       isSelectAll(){
         if (this.cartList.length === 0){
